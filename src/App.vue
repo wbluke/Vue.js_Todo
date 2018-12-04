@@ -3,7 +3,7 @@
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addTodo"></TodoInput>
     <TodoList v-bind:propsdata="todoItems"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoFooter v-on:removeAll="clearAll"></TodoFooter>
   </div>
 </template>
 
@@ -27,6 +27,10 @@ export default {
     }
   },
   methods: {
+    clearAll() {
+      localStorage.clear();
+      this.todoItems = [];
+    },
     addTodo(todoItem) {
       //setItem is API which save data on localstorage.
       //Form of this API is (key, value). For simple configuration, set equal key and value.
