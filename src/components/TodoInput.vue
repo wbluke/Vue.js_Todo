@@ -18,10 +18,7 @@ export default {
     addTodo() {
       if(this.newTodoItem !== "") {
         var value = this.newTodoItem && this.newTodoItem.trim();
-        //setItem is API which save data on localstorage.
-        //Form of this API is (key, value). For simple configuration, set equal key and value.
-        //Google Developer Tool => Application => Local Storage => http://localhost:8080 
-        localStorage.setItem(value, value);
+        this.$emit('addTodo', value);
         this.clearInput();
       }
     },

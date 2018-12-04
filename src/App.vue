@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <TodoInput v-on:addTodo="addTodo"></TodoInput>
+    <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -14,6 +14,27 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
+  data() {
+    return {
+      todoItems: []
+    }
+  },
+  created() {
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++){
+        this.todoItems.push(localStorage.key(i));
+      }
+    }
+  },
+  methods: {
+    addTodo(todoItem) {
+      //setItem is API which save data on localstorage.
+      //Form of this API is (key, value). For simple configuration, set equal key and value.
+      //Google Developer Tool => Application => Local Storage => http://localhost:8080 
+      localStorage.setItem(todoItem, todoItem);
+      this.todoItems.push(todoItem);
+    }
+  },
   components: {
     'TodoHeader': TodoHeader,
     'TodoInput': TodoInput,
